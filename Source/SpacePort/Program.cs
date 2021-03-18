@@ -7,9 +7,15 @@ namespace SpacePort
         static void Main(string[] args)
         {
             //Menu.ShowMenu("Welcome", new string[] { "Park", "Pay for parking" });
-            Api test = new Api();
-            var e = test.ValidateName("Luke Skywalker");
+
+            var e = Api.ValidateName("Luke Skywalker");
             Console.WriteLine(e.Result);
+
+            //var e = Api.GetStarShips();
+            //foreach (var item in e.Result)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
 
         }
     }

@@ -10,19 +10,19 @@ namespace SpacePort
 {
     class Api
     {
-        public async Task<bool> ValidateName(string name)
+        public static async Task<bool> ValidateName(string name)
         {
             var client = new RestClient("https://swapi.dev/api/");
             var request = new RestRequest("people/", DataFormat.Json);
 
-            var peopleResponse =  client.GetAsync<PersonsResponse>(request);
+            var peopleResponse = await client.GetAsync<PersonsResponse>(request);
 
-            peopleResponse.Result.Next = "INTE NULL";
+            peopleResponse.Next = "INTE NULL";
             
             int i = 2;
-            while (peopleResponse.Result.Next != null)
+            while (peopleResponse.Next != null)
             {
-                foreach (var p in peopleResponse.Result.Results)
+                foreach (var p in peopleResponse.Results)
                 {
                     if (p.Name.ToLower() == name.ToLower())
                     {
@@ -30,10 +30,35 @@ namespace SpacePort
                     }
                 }
                 request = new RestRequest("people/?page=" + i);
-                peopleResponse = client.GetAsync<PersonsResponse>(request);
+                peopleResponse = await client.GetAsync<PersonsResponse>(request);
                 i++;
             }
             return false;
         }
+        public static async Task<List<Starship>> GetStarShips()
+        {
+            List<Starship> starships = new List<Starship>();
+            var client = new RestClient("https://swapi.dev/api/");
+            var request = new RestRequest("starships/", DataFormat.Json);
+
+            var starshipResponse = await client.GetAsync<Starships>(request);
+
+            starshipResponse.Next = "INTE NULL";
+
+            int i = 2;
+            while (starshipResponse.Next != null)
+            {
+                foreach (var p in starshipResponse.Results)
+                {
+                    starships.Add(p);
+                }
+                request = new RestRequest("starships/?page=" + i);
+                starshipResponse = await client.GetAsync<Starships>(request);
+                i++;
+            }
+            return starships;
+        }
+
+
     }
 }
