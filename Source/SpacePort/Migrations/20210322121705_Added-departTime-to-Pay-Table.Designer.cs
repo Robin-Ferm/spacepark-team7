@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePort;
 
 namespace SpacePort.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210322121705_Added-departTime-to-Pay-Table")]
+    partial class AddeddepartTimetoPayTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,30 +63,6 @@ namespace SpacePort.Migrations
                     b.HasIndex("ParkID");
 
                     b.ToTable("Pay");
-                });
-
-            modelBuilder.Entity("SpacePort.Receipt", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PayID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PersonName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("SpaceShip")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("Pay", b =>

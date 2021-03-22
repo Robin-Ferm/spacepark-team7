@@ -73,9 +73,9 @@ namespace SpacePort
             if (selected.ToString() == "Park")
             {
                 Console.Write("Write your name:");
-                string PersonName = Console.ReadLine();
+                string personName = Console.ReadLine();
 
-                if (Api.ValidateName(PersonName).Result)
+                if (Api.ValidateName(personName).Result)
                 {
                     List<Starship> starships = Api.GetStarShips().Result;
                     List<object> starshipNames = new();
@@ -83,7 +83,20 @@ namespace SpacePort
                     {
                         starshipNames.Add(item.Name);
                     }
-                    ShowMenu("Choose your vehicle:", starshipNames.ToArray());
+                    var spaceShip = ShowMenu("Choose your vehicle:", starshipNames.ToArray());
+                    
+                    if (DBMethods.AlreadyParked(personName))
+                    {
+                        
+                        Console.Clear();
+                        Console.WriteLine("You need to pay for your parking before you can park again");
+                    }
+                    else
+                    {
+                        DBMethods.AddParking(personName, spaceShip.ToString());
+                        Console.Clear();
+                        Console.WriteLine("Your parking is done");
+                    }
                 }
                 else
                 {
@@ -94,13 +107,11 @@ namespace SpacePort
             else if (selected.ToString() == "Pay for parking")
             {
                 Console.Write("Write your name:");
-                string PersonName = Console.ReadLine();
+                string personName = Console.ReadLine();
 
-                if (Api.ValidateName(PersonName).Result)
+                if (Api.ValidateName(personName).Result)
                 {
-                    //få data ifrån databasen med tid som dem anlände och vilken farkost dem hade.
-                    Console.WriteLine("JA hej då...");
-                    Console.WriteLine("Hoppas du inte kommer tillbaks igen");
+                    DBMethods.PayForParking(personName);
                 }
                 else
                 {

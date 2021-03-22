@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePort;
 
 namespace SpacePort.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210322144840_Add-Rececipt-Table")]
+    partial class AddRececiptTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,8 +78,8 @@ namespace SpacePort.Migrations
                     b.Property<string>("PersonName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpaceShip")
                         .HasColumnType("nvarchar(max)");

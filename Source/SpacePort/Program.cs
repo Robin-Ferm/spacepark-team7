@@ -6,12 +6,11 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
-            //object selected = Menu.ShowMenu("Welcome", new string[] { "Park", "Pay for parking" });
+            object selected = Menu.ShowMenu("Welcome", new string[] { "Park", "Pay for parking" });
 
-            //Menu.SelectedMenuChoice(selected);
+            Menu.SelectedMenuChoice(selected);
 
-            DBMethods.AddParking();
-            
+            //DBMethods.GetLastTimeParked("boba fet");
 
         }
     }

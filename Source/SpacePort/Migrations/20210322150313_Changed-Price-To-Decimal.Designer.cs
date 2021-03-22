@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePort;
 
 namespace SpacePort.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210322150313_Changed-Price-To-Decimal")]
+    partial class ChangedPriceToDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
