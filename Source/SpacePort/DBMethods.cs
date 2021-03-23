@@ -115,14 +115,12 @@ namespace SpacePort
 
                 if (query < 10)
                 {
-                    Console.Clear();
                     Console.WriteLine($"There is {10 - query} parking spaces left");
                     return true;
                 }
                 else
                 {
-                    Console.Clear();
-                    Console.WriteLine("Sorry, all the parking spaces are occupide, please come back later");
+                    Console.WriteLine("Sorry, all the parking spaces are occupied, please come back later");
                     return false;
                 }
 
