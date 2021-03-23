@@ -8,7 +8,7 @@ using SpacePort.DataModels;
 
 namespace SpacePort
 {
-    class Api
+    public static class Api
     {
         public static async Task<bool> ValidateName(string name)
         {

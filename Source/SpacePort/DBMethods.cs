@@ -63,6 +63,7 @@ namespace SpacePort
                 {
                     var pay = new Pay { DepartTime = departTime, ParkID = query.ID };
                     db.Pay.Add(pay);
+                    query.Payed = true;
                     db.SaveChanges();
                     ShowReceipt(name, timeParked);
                 }
@@ -110,10 +111,10 @@ namespace SpacePort
                     where p.Payed == false
                     select p).Count();
 
-                if (query < 2)
+                if (query < 10)
                 {
                     Console.Clear();
-                    Console.WriteLine($"There is {2 - query} parking spaces left");
+                    Console.WriteLine($"There is {10 - query} parking spaces left");
                     return true;
                 }
                 else

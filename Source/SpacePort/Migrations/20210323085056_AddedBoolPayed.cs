@@ -6,10 +6,6 @@ namespace SpacePort.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Payed",
-                table: "Pay");
-
             migrationBuilder.AddColumn<bool>(
                 name: "Payed",
                 table: "Park",
@@ -23,13 +19,6 @@ namespace SpacePort.Migrations
             migrationBuilder.DropColumn(
                 name: "Payed",
                 table: "Park");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "Payed",
-                table: "Pay",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
         }
     }
 }

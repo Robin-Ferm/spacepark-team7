@@ -70,6 +70,7 @@ namespace SpacePort
 
         public static void SelectedMenuChoice(object selected)
         {
+            bool done = false;
             if (selected.ToString() == "Park")
             {
                 if (DBMethods.EmptySpaces())
@@ -126,6 +127,12 @@ namespace SpacePort
                     Console.WriteLine("Sorry your name is not on the VIP list.");
                     Console.WriteLine("You have to leave immeately or else the security will hunt you down");
                 }
+            }
+            else if (selected.ToString() == "Exit")
+            {
+                Console.Clear();
+                Console.WriteLine("You exited the parking program.");
+                done = true;
             }
         }
     }

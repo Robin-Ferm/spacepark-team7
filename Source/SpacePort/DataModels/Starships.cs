@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SpacePort.DataModels
 {
-    class Starships
+    public class Starships
     {
         public int Count { get; set; }
         public List<Starship> Results { get; set; }
         public string Next { get; set; }
     }
-    class Starship
+    public class Starship
     {
         public string Name { get; set; }
         public string Model { get; set; }
