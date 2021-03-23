@@ -20,7 +20,7 @@ namespace SpacePort
         {
             Console.WriteLine();
             Console.WriteLine("Press any key to continue!");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
