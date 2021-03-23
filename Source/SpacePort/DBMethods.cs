@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace SpacePort
 {
@@ -22,33 +24,26 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-
-                var query = (from p in db.Park
-                             where p.PersonName == name
-                             orderby p.ID descending
-                             select p.ID).FirstOrDefault();
-
-                if (query == 0)
+                if (db.Park.Any(p => p.PersonName == name))
                 {
-                    return false;
-                }
-                else
-                {
-                    var query2 = (from e in db.Pay
-                                 join d in db.Park on e.ParkID equals d.ID
-                                 where e.ParkID == query
-                                 select e).FirstOrDefault();
+                    var query = (from p in db.Park
+                        where p.PersonName == name
+                        orderby p.ID descending
+                        select p.Payed).First();
 
-
-                    if (query2 == null)
-                    {
-                        return true;
-                    }
-                    else
+                    if (query == true)
                     {
                         return false;
                     }
+                    else
+                    {
+                        return true;
+                    }
                 }
+
+                return false;
+               
+                
             }
         }
 
@@ -102,6 +97,32 @@ namespace SpacePort
 
                 Console.WriteLine($"{query.PersonName} parked with {query.SpaceShip}");
                 Console.WriteLine($"{query.PersonName} payed {totalPrice} credits for the parking");
+            }
+
+            
+        }
+
+        public static bool EmptySpaces()
+        {
+            using (var db = new MyContext())
+            {
+                var query = (from p in db.Park
+                    where p.Payed == false
+                    select p).Count();
+
+                if (query < 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"There is {2 - query} parking spaces left");
+                    return true;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Sorry, all the parking spaces are occupide, please come back later");
+                    return false;
+                }
+
             }
         }
     }

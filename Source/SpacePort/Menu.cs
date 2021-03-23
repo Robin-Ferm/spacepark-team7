@@ -23,14 +23,14 @@ namespace SpacePort
 
             ConsoleKey key = Console.ReadKey().Key;
 
-            while(key != ConsoleKey.Enter)
+            while (key != ConsoleKey.Enter)
             {
                 if (key == ConsoleKey.UpArrow && selected > 0)
                 {
                     selected--;
                     HighlightMenuOption(info, options, selected);
                 }
-                else if (key == ConsoleKey.DownArrow && selected < options.Length -1)
+                else if (key == ConsoleKey.DownArrow && selected < options.Length - 1)
                 {
                     selected++;
                     HighlightMenuOption(info, options, selected);
@@ -72,36 +72,44 @@ namespace SpacePort
         {
             if (selected.ToString() == "Park")
             {
-                Console.Write("Write your name:");
-                string personName = Console.ReadLine();
-
-                if (Api.ValidateName(personName).Result)
+                if (DBMethods.EmptySpaces())
                 {
-                    List<Starship> starships = Api.GetStarShips().Result;
-                    List<object> starshipNames = new();
-                    foreach (var item in starships)
+
+
+                    Console.Write("Write your name:");
+                    string personName = Console.ReadLine();
+
+                    if (Api.ValidateName(personName).Result)
                     {
-                        starshipNames.Add(item.Name);
-                    }
-                    var spaceShip = ShowMenu("Choose your vehicle:", starshipNames.ToArray());
-                    
-                    if (DBMethods.AlreadyParked(personName))
-                    {
-                        
-                        Console.Clear();
-                        Console.WriteLine("You need to pay for your parking before you can park again");
+                        if (DBMethods.AlreadyParked(personName))
+                        {
+
+                            Console.Clear();
+                            Console.WriteLine("You need to pay for your parking before you can park again");
+                        }
+                        else
+                        {
+                            List<Starship> starships = Api.GetStarShips().Result;
+                            List<object> starshipNames = new();
+                            foreach (var item in starships)
+                            {
+                                starshipNames.Add(item.Name);
+                            }
+
+                            var spaceShip = ShowMenu("Choose your vehicle:", starshipNames.ToArray());
+
+
+
+                            DBMethods.AddParking(personName, spaceShip.ToString());
+                            Console.Clear();
+                            Console.WriteLine("Your parking is done");
+                        }
                     }
                     else
                     {
-                        DBMethods.AddParking(personName, spaceShip.ToString());
-                        Console.Clear();
-                        Console.WriteLine("Your parking is done");
+                        Console.WriteLine("Sorry your name is not on the VIP list.");
+                        Console.WriteLine("You have to leave immeately or else the security will hunt you down");
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Sorry your name is not on the VIP list.");
-                    Console.WriteLine("You have to leave immeately or else the security will hunt you down");
                 }
             }
             else if (selected.ToString() == "Pay for parking")

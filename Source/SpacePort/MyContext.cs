@@ -18,7 +18,7 @@ namespace SpacePort
         //Byt connection string så det funkar för dig
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-ODSJ3G7\SQLEXPRESS;Database=SpacePortDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=Cesc\SQLEXPRESS;Database=SpacePortDB;Trusted_Connection=True;");
         }
     }
 }

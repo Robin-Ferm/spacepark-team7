@@ -9,4 +9,6 @@ public class Pay
     public Park Park { get; set; }
     public int Invoice { get; set; }
     public DateTime DepartTime { get; set; }
+    
+
 }
