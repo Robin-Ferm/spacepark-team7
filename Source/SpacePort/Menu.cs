@@ -73,6 +73,7 @@ namespace SpacePort
             bool done = false;
             if (selected.ToString() == "Park")
             {
+                Console.Clear();
                 if (DBMethods.EmptySpaces())
                 {
 

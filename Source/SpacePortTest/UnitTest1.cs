@@ -1,6 +1,7 @@
 using System;
 using SpacePort;
 using Xunit;
+using System.Linq;
 
 namespace SpacePortTest
 {
@@ -37,6 +38,28 @@ namespace SpacePortTest
             var result = DBMethods.AlreadyParked("Boba Fett");
 
             Assert.False(result);
+        }
+
+        [Fact]
+        public void ParkingSpacesLeft()
+        {
+
+            var result = DBMethods.EmptySpaces();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void CheckIfParkDataBaseIsNotEmpty()
+        {
+            using (var db = new MyContext())
+            {
+                var query = (from p in db.Park
+                             select p).Count();
+
+                Assert.True(query > 0);
+            }
+
         }
     }
 }
