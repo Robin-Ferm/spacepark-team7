@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpacePort
 {
-    class Menu
+    public class Menu
     {
         public static object ShowMenu(string info, object[] options)
         {
@@ -78,6 +78,7 @@ namespace SpacePort
 
 
                     Console.Write("Write your name:");
+                    
                     string personName = Console.ReadLine();
 
                     if (Api.ValidateName(personName).Result)
@@ -87,6 +88,7 @@ namespace SpacePort
 
                             Console.Clear();
                             Console.WriteLine("You need to pay for your parking before you can park again");
+                            Program.Continue();
                         }
                         else
                         {
@@ -104,12 +106,14 @@ namespace SpacePort
                             DBMethods.AddParking(personName, spaceShip.ToString());
                             Console.Clear();
                             Console.WriteLine("Your parking is done");
+                            Program.Continue();
                         }
                     }
                     else
                     {
                         Console.WriteLine("Sorry your name is not on the VIP list.");
                         Console.WriteLine("You have to leave immeately or else the security will hunt you down");
+                        Program.Continue();
                     }
                 }
             }
@@ -126,6 +130,7 @@ namespace SpacePort
                 {
                     Console.WriteLine("Sorry your name is not on the VIP list.");
                     Console.WriteLine("You have to leave immeately or else the security will hunt you down");
+                    Program.Continue();
                 }
             }
             else if (selected.ToString() == "Exit")

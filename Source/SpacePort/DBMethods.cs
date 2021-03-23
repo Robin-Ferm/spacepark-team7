@@ -70,6 +70,7 @@ namespace SpacePort
                 else
                 {
                     Console.WriteLine("You have not parked before");
+                    Program.Continue();
                 }
             }
         }
@@ -98,6 +99,7 @@ namespace SpacePort
 
                 Console.WriteLine($"{query.PersonName} parked with {query.SpaceShip}");
                 Console.WriteLine($"{query.PersonName} payed {totalPrice} credits for the parking");
+                Program.Continue();
             }
 
             
