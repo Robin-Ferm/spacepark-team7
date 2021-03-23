@@ -126,5 +126,25 @@ namespace SpacePort
 
             }
         }
+        public static void AlreadyPaid(string name)
+        {
+            using (var db = new MyContext())
+            {
+                var query = (from p in db.Park
+                            where p.PersonName == name
+                            orderby p.ID descending
+                            select p.Payed).First();
+
+                if (query)
+                {
+                    Console.WriteLine("You have already paid for your last parking");
+                    Program.Continue();
+                }
+                else
+                {
+                    PayForParking(name);
+                }
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace SpacePort
             object selected = alt;
             while (selected.ToString() != "Exit")
             {
-                selected = Menu.ShowMenu("Welcome", new string[] { "Park", "Pay for parking", "Exit" });
+                selected = Menu.ShowMenu("Welcome", alt);
                 Menu.SelectedMenuChoice(selected);
             }
 

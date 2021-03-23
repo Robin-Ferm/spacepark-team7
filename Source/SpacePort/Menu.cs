@@ -74,6 +74,8 @@ namespace SpacePort
             if (selected.ToString() == "Park")
             {
                 Console.Clear();
+                Console.WriteLine("Fill in parking details");
+                Console.WriteLine();
                 if (DBMethods.EmptySpaces())
                 {
 
@@ -120,12 +122,15 @@ namespace SpacePort
             }
             else if (selected.ToString() == "Pay for parking")
             {
+                Console.Clear();
+                Console.WriteLine("Pay for your parking");
+                Console.WriteLine();
                 Console.Write("Write your name:");
                 string personName = Console.ReadLine();
 
                 if (Api.ValidateName(personName).Result)
                 {
-                    DBMethods.PayForParking(personName);
+                    DBMethods.AlreadyPaid(personName);
                 }
                 else
                 {
