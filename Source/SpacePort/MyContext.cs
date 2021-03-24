@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace SpacePort
@@ -19,6 +20,13 @@ namespace SpacePort
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Database=SpacePortDB;Trusted_Connection=True;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Park>().HasData(
+                new Park { ID = 1, PersonName = "Watto", SpaceShip = "x-wing", ArrivalTime = DateTime.Now, Payed = false}
+            );
         }
     }
 }

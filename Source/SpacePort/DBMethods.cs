@@ -166,6 +166,7 @@ namespace SpacePort
 
                 if (query)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("You have already paid for your last parking");
                     Program.Continue();
                 }

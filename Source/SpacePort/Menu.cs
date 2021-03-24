@@ -70,7 +70,6 @@ namespace SpacePort
 
         public static void SelectedMenuChoice(object selected)
         {
-            bool done = false;
             if (selected.ToString() == "Park")
             {
                 Console.Clear();
@@ -80,7 +79,7 @@ namespace SpacePort
                 {
 
 
-                    Console.Write("Write your name:");
+                    Console.Write("Write your name: ");
                     
                     string personName = Console.ReadLine();
 
@@ -143,7 +142,6 @@ namespace SpacePort
             {
                 Console.Clear();
                 Console.WriteLine("You exited the parking program.");
-                done = true;
             }
         }
     }
