@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SpacePortTest
 {
-    public class UnitTest1
+    public class UnitTests
     {
         [Fact]
         public void RecievingNames()

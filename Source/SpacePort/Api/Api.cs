@@ -46,12 +46,17 @@ namespace SpacePort
             starshipResponse.Next = "INTE NULL";
 
             int i = 2;
+            double result;
             while (starshipResponse.Next != null)
             {
-                foreach (var p in starshipResponse.Results)
+                foreach (var s in starshipResponse.Results)
                 {
-                    starships.Add(p);
-                }
+                    bool test = Double.TryParse(s.Length, out result);
+                    if (test && result < 500.00)
+                    {
+                        starships.Add(s);
+                    }
+            }
                 request = new RestRequest("starships/?page=" + i);
                 starshipResponse = await client.GetAsync<Starships>(request);
                 i++;

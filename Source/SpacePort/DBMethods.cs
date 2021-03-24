@@ -122,6 +122,7 @@ namespace SpacePort
                 else
                 {
                     Console.WriteLine("Sorry, all the parking spaces are occupied, please come back later");
+                    Program.Continue();
                     return false;
                 }
             }

@@ -113,6 +113,7 @@ namespace SpacePort
                     }
                     else
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Sorry your name is not on the VIP list.");
                         Console.WriteLine("You have to leave immeately or else the security will hunt you down");
                         Program.Continue();
