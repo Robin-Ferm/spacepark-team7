@@ -26,11 +26,7 @@ namespace SpacePort
             {
                 if (db.Park.Any(p => p.PersonName == name))
                 {
-                    //var query = (from p in db.Park
-                    //             where p.PersonName == name
-                    //             orderby p.ID descending
-                    //             select p.Payed).First();
-
+                    
                     var query = db.Park
                         .Where(p => p.PersonName == name)
                         .OrderByDescending(p => p.ID)
@@ -47,8 +43,6 @@ namespace SpacePort
                 }
 
                 return false;
-               
-                
             }
         }
 
@@ -56,11 +50,6 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                //var query = (from e in db.Park
-                //             where e.PersonName == name
-                //             orderby e.ID descending
-                //             select e).FirstOrDefault();
-
                 var query = db.Park
                     .Where(e => e.PersonName == name)
                     .OrderByDescending(e => e.ID)
@@ -89,27 +78,24 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                //var query = (from p in db.Park
-                //             where p.PersonName == name
-                //             orderby p.ID descending
-                //             select p).FirstOrDefault();
-
                 var query = db.Park
                     .Where(p => p.PersonName == name)
                     .OrderByDescending(p => p.ID)
                     .FirstOrDefault();
 
-
-
-                var query2 = (from e in db.Pay
-                              join d in db.Park on e.ParkID equals d.ID
-                              where e.ParkID == query.ID
-                              select e).FirstOrDefault();
-
-
-
-
-
+                var query2 = db.Park
+                    .Where( x => x.PersonName == name)
+                    .Join(
+                    db.Pay,
+                    park => park.ID,
+                    pay => pay.ParkID,
+                    (park, pay) => new
+                    {
+                        ID = pay.ID,
+                        PersonName = park.PersonName,
+                        SpaceShip = park.SpaceShip
+                    }).FirstOrDefault();
+                    
                 double totalPrice = Math.Round(timeParked.TotalHours * 10000, 2);
 
                 var receipt = new Receipt { PayID = query2.ID, PersonName = query.PersonName, SpaceShip = query.SpaceShip, Price = totalPrice};
@@ -128,10 +114,6 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                //var query = (from p in db.Park
-                //    where p.Payed == false
-                //    select p).Count();
-
                 var query = db.Park
                     .Where(p => p.Payed == false)
                     .Count();
@@ -146,24 +128,17 @@ namespace SpacePort
                     Console.WriteLine("Sorry, all the parking spaces are occupied, please come back later");
                     return false;
                 }
-
             }
         }
         public static void AlreadyPaid(string name)
         {
             using (var db = new MyContext())
             {
-                //var query = (from p in db.Park
-                //            where p.PersonName == name
-                //            orderby p.ID descending
-                //            select p.Payed).First();
-
                 var query = db.Park
                     .Where(p => p.PersonName == name)
                     .OrderByDescending(p => p.ID)
                     .Select(p => p.Payed).First();
                     
-
                 if (query)
                 {
                     Console.WriteLine();
