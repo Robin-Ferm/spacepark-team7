@@ -26,12 +26,17 @@ namespace SpacePort
             {
                 if (db.Park.Any(p => p.PersonName == name))
                 {
-                    var query = (from p in db.Park
-                        where p.PersonName == name
-                        orderby p.ID descending
-                        select p.Payed).First();
+                    //var query = (from p in db.Park
+                    //             where p.PersonName == name
+                    //             orderby p.ID descending
+                    //             select p.Payed).First();
 
-                    if (query == true)
+                    var query = db.Park
+                        .Where(p => p.PersonName == name)
+                        .OrderByDescending(p => p.ID)
+                        .Select(p => p.Payed).First();
+
+                    if (query)
                     {
                         return false;
                     }
@@ -51,10 +56,15 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                var query = (from e in db.Park
-                             where e.PersonName == name
-                             orderby e.ID descending
-                             select e).FirstOrDefault();
+                //var query = (from e in db.Park
+                //             where e.PersonName == name
+                //             orderby e.ID descending
+                //             select e).FirstOrDefault();
+
+                var query = db.Park
+                    .Where(e => e.PersonName == name)
+                    .OrderByDescending(e => e.ID)
+                    .FirstOrDefault();
 
                 DateTime departTime = DateTime.Now;
                 TimeSpan timeParked = departTime - query.ArrivalTime;
@@ -79,10 +89,17 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                var query = (from p in db.Park
-                             where p.PersonName == name
-                             orderby p.ID descending
-                             select p).FirstOrDefault();
+                //var query = (from p in db.Park
+                //             where p.PersonName == name
+                //             orderby p.ID descending
+                //             select p).FirstOrDefault();
+
+                var query = db.Park
+                    .Where(p => p.PersonName == name)
+                    .OrderByDescending(p => p.ID)
+                    .FirstOrDefault();
+
+
 
                 var query2 = (from e in db.Pay
                               join d in db.Park on e.ParkID equals d.ID
@@ -90,7 +107,9 @@ namespace SpacePort
                               select e).FirstOrDefault();
 
 
-                
+
+
+
                 double totalPrice = Math.Round(timeParked.TotalHours * 10000, 2);
 
                 var receipt = new Receipt { PayID = query2.ID, PersonName = query.PersonName, SpaceShip = query.SpaceShip, Price = totalPrice};
@@ -109,9 +128,13 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                var query = (from p in db.Park
-                    where p.Payed == false
-                    select p).Count();
+                //var query = (from p in db.Park
+                //    where p.Payed == false
+                //    select p).Count();
+
+                var query = db.Park
+                    .Where(p => p.Payed == false)
+                    .Count();
 
                 if (query < 10)
                 {
@@ -130,10 +153,16 @@ namespace SpacePort
         {
             using (var db = new MyContext())
             {
-                var query = (from p in db.Park
-                            where p.PersonName == name
-                            orderby p.ID descending
-                            select p.Payed).First();
+                //var query = (from p in db.Park
+                //            where p.PersonName == name
+                //            orderby p.ID descending
+                //            select p.Payed).First();
+
+                var query = db.Park
+                    .Where(p => p.PersonName == name)
+                    .OrderByDescending(p => p.ID)
+                    .Select(p => p.Payed).First();
+                    
 
                 if (query)
                 {
