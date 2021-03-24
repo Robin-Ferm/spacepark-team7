@@ -79,12 +79,8 @@ namespace SpacePort
             using (var db = new MyContext())
             {
                 var query = db.Park
-                    .Where(p => p.PersonName == name)
-                    .OrderByDescending(p => p.ID)
-                    .FirstOrDefault();
-
-                var query2 = db.Park
                     .Where( x => x.PersonName == name)
+                    .OrderByDescending(x => x.ID)
                     .Join(
                     db.Pay,
                     park => park.ID,
@@ -98,7 +94,7 @@ namespace SpacePort
                     
                 double totalPrice = Math.Round(timeParked.TotalHours * 10000, 2);
 
-                var receipt = new Receipt { PayID = query2.ID, PersonName = query.PersonName, SpaceShip = query.SpaceShip, Price = totalPrice};
+                var receipt = new Receipt { PayID = query.ID, PersonName = query.PersonName, SpaceShip = query.SpaceShip, Price = totalPrice};
                 db.Receipts.Add(receipt);
                 db.SaveChanges();
 
@@ -137,7 +133,7 @@ namespace SpacePort
                 var query = db.Park
                     .Where(p => p.PersonName == name)
                     .OrderByDescending(p => p.ID)
-                    .Select(p => p.Payed).First();
+                    .Select(p => p.Payed).FirstOrDefault();
                     
                 if (query)
                 {
