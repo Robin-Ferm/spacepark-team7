@@ -99,7 +99,7 @@ namespace SpacePort
                 db.SaveChanges();
 
                 Console.WriteLine($"{query.PersonName} parked with {query.SpaceShip}");
-                Console.WriteLine($"{query.PersonName} payed {totalPrice} credits for the parking");
+                Console.WriteLine($"{query.PersonName} paid {totalPrice} credits for the parking");
                 Program.Continue();
             }
 
@@ -116,7 +116,7 @@ namespace SpacePort
 
                 if (query < 10)
                 {
-                    Console.WriteLine($"There is {10 - query} parking spaces left");
+                    Console.WriteLine($"There are {10 - query} parking spaces left");
                     return true;
                 }
                 else

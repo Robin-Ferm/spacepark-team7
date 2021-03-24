@@ -115,7 +115,7 @@ namespace SpacePort
                     {
                         Console.WriteLine();
                         Console.WriteLine("Sorry your name is not on the VIP list.");
-                        Console.WriteLine("You have to leave immeately or else the security will hunt you down");
+                        Console.WriteLine("You have to leave immediately or else the security will hunt you down");
                         Program.Continue();
                     }
                 }
@@ -125,7 +125,7 @@ namespace SpacePort
                 Console.Clear();
                 Console.WriteLine("Pay for your parking");
                 Console.WriteLine();
-                Console.Write("Write your name:");
+                Console.Write("Write your name: ");
                 string personName = Console.ReadLine();
 
                 if (Api.ValidateName(personName).Result)
@@ -135,7 +135,7 @@ namespace SpacePort
                 else
                 {
                     Console.WriteLine("Sorry your name is not on the VIP list.");
-                    Console.WriteLine("You have to leave immeately or else the security will hunt you down");
+                    Console.WriteLine("You have to leave immediately or else the security will hunt you down");
                     Program.Continue();
                 }
             }
