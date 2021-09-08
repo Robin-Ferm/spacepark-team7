@@ -6,7 +6,7 @@ namespace SpacePort
     {
         static void Main(string[] args)
         {
-            var alt = new string[] { "Park", "Pay for parking", "Exit", "Test", "esh" };
+            var alt = new string[] { "Park", "Pay for parking", "Exit", "Test" };
             object selected = alt;
             while (selected.ToString() != "Exit")
             {
