@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, testingCI ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, testingCI ]
 env:
   CI: ture
 jobs:
